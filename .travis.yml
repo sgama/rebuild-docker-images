@@ -1,0 +1,33 @@
+sudo: 'required'
+
+language: go
+
+services:
+  - 'docker'
+
+# Useful for forks by other contributors
+env:
+  global:
+  - ORGANIZATION=$DOCKER_USERNAME
+
+matrix:
+  include:
+    - env: IMAGE_NAME=sonarr
+    - env: IMAGE_NAME=radarr
+
+before_install:
+  - 'make'
+  - 'make install'
+    
+script:
+  - 'make docker-image'
+
+after_success:
+  docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
+  make docker-push;
+
+notifications:
+  email: false
+  slack:
+    on_success: always
+    on_failure: always
