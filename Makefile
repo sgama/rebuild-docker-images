@@ -4,16 +4,13 @@ ORGANIZATION?=solardesigner
 IMAGE_NAME?=unknown
 UPSTREAM_VERSION?=latest
 
-all: $(IMAGE_NAME) version.properties
+default: image
 
-version.properties:
-	@echo "version=${UPSTREAM_VERSION}"
-
-docker-image: docker-build
+image:
 	docker build --build-arg UPSTREAM_VERSION=$(UPSTREAM_VERSION) -t $(ORGANIZATION)/$(IMAGE_NAME) -f ./${IMAGE_NAME}
 	docker tag $(ORGANIZATION)/$(IMAGE_NAME):latest $(ORGANIZATION)/$(IMAGE_NAME):${UPSTREAM_VERSION}
 
-docker-push: docker-image
+push: image
 	docker push $(ORGANIZATION)/$(IMAGE_NAME):${UPSTREAM_VERSION}
 
-.PHONY: all docker-image docker-push
+.PHONY: default image push

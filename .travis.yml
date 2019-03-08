@@ -19,11 +19,11 @@ before_install:
   - 'make'
     
 script:
-  - 'make docker-image'
+  - 'make image'
 
 after_success:
   docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD;
-  make docker-push;
+  make push;
 
 notifications:
   email: false
