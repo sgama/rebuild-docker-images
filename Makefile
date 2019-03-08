@@ -7,7 +7,7 @@ UPSTREAM_VERSION?=latest
 default: image
 
 image:
-	docker build --build-arg UPSTREAM_VERSION=$(UPSTREAM_VERSION) -t $(ORGANIZATION)/$(IMAGE_NAME) -f ./${IMAGE_NAME}/Dockerfile
+	docker build --build-arg UPSTREAM_VERSION=$(UPSTREAM_VERSION) -t $(ORGANIZATION)/$(IMAGE_NAME) ./${IMAGE_NAME}/
 	docker tag $(ORGANIZATION)/$(IMAGE_NAME):latest $(ORGANIZATION)/$(IMAGE_NAME):${UPSTREAM_VERSION}
 
 push: image
