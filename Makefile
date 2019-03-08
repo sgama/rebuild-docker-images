@@ -5,7 +5,7 @@ IMAGE_NAME?=unknown
 UPSTREAM_VERSION?=latest
 
 docker-image: Dockerfile
-	docker build --build-arg UPSTREAM_VERSION=$(UPSTREAM_VERSION) -t $(ORGANIZATION)/$(IMAGE_NAME) ./${IMAGE_NAME}
+	docker build --build-arg UPSTREAM_VERSION=$(UPSTREAM_VERSION) -t $(ORGANIZATION)/$(IMAGE_NAME) -f ./${IMAGE_NAME}
 	docker tag $(ORGANIZATION)/$(IMAGE_NAME):latest $(ORGANIZATION)/$(IMAGE_NAME):${UPSTREAM_VERSION}
 
 docker-push: docker-image
