@@ -17,7 +17,6 @@ matrix:
 
 before_install:
   - 'make'
-  - 'make install'
     
 script:
   - 'make docker-image'
